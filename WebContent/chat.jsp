@@ -53,10 +53,9 @@ function startWebSocket() {
 
     ws.onopen = function(evt) {
     	$('#denglu').html("在线");
-        $('userName').html(self);
+        $('#userName').html(self);
     };
 }
-
 
 function setMessageInnerHTML(innerHTML){
 	var temp = $('#message').html();
