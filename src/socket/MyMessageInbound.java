@@ -41,7 +41,7 @@ public class MyMessageInbound extends MessageInbound {
 		String mapContent = messageMap.get("content");
 		
 		if("all".equals(toName)){
-			String msgContentString = fromName + "说: " + mapContent;   //构造发送的消息
+			String msgContentString = fromName + "对所有人说: " + mapContent;   //构造发送的消息
 			String content = MessageUtil.sendContent(MessageUtil.MESSAGE,msgContentString);
 			broadcastAll(content);
 		}else{
@@ -61,7 +61,7 @@ public class MyMessageInbound extends MessageInbound {
 			WsOutbound outbound = messageInbound.getWsOutbound(); 
 			WsOutbound outFromBound = messageFromInbound.getWsOutbound();
 			
-			String msgContentString = fromName + "说: " + mapContent;   //构造发送的消息
+			String msgContentString = fromName + "对" + toName + "说: " + mapContent;   //构造发送的消息
 			String contentTemp = MessageUtil.sendContent(MessageUtil.MESSAGE,msgContentString);
 			
 			outFromBound.writeTextMessage(CharBuffer.wrap(contentTemp.toCharArray()));
@@ -76,8 +76,11 @@ public class MyMessageInbound extends MessageInbound {
 	}
 
 	@Override  
-	protected void onClose(int status) {  
-		InitServlet.getSocketList().remove(this);
+	protected void onClose(int status) { 
+		if(name!=null){
+			InitServlet.getSocketList().remove(name);//删除客服ID与用户
+			System.out.println("用户" + name + "退出");
+		}
 		String names = getNames();
 		String content = MessageUtil.sendContent(MessageUtil.USER,names);
 		broadcastAll(content);
