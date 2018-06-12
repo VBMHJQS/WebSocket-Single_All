@@ -26,9 +26,9 @@
         var ws = null;
         function startWebSocket() {
             if ('WebSocket' in window)
-                ws = new WebSocket("ws://localhost:8080/WebSocketUser/websocket.do");
+                ws = new WebSocket("ws://localhost:8080/websocket");
             else if ('MozWebSocket' in window)
-                ws = new MozWebSocket("ws://localhost:8080/WebSocketUser/websocket.do");
+                ws = new MozWebSocket("ws://localhost:8080/websocket");
             else
                 alert("not support");
 
