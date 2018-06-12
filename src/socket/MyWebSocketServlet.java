@@ -1,9 +1,9 @@
 package socket;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.catalina.websocket.StreamInbound;
 import org.apache.catalina.websocket.WebSocketServlet;
+
+import javax.servlet.http.HttpServletRequest;
 @SuppressWarnings({ "serial", "deprecation" })
 public class MyWebSocketServlet extends WebSocketServlet {
 
@@ -14,7 +14,9 @@ public class MyWebSocketServlet extends WebSocketServlet {
 		}
 		return userName;  
 		
-	}  
+	}
+
+	@Override
 	protected StreamInbound createWebSocketInbound(String arg0,
 			HttpServletRequest request) {
 		System.out.println("用户" + request.getSession().getAttribute("user") + "登录");
